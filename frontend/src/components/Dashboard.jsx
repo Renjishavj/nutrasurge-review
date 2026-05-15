@@ -26,7 +26,7 @@ const Dashboard = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get('https://nutrasurge-reviews.onrender.com//api/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Failed to fetch products', error);
@@ -59,7 +59,7 @@ const Dashboard = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`https://nutrasurge-reviews.onrender.com//api/products/${id}`);
       setProducts(products.filter((p) => p._id !== id));
     } catch (error) {
       console.error('Failed to delete product', error);

@@ -31,7 +31,7 @@ const ProductList = ({ products, loading, onEdit, onDelete, showActions = true }
               {product.image ? (
                 <div className="product-image-container">
                   <img 
-                    src={product.image?.startsWith('http') ? product.image : `http://localhost:5000${product.image}`} 
+                    src={product.image?.startsWith('http') ? product.image : `https://nutrasurge-reviews.onrender.com/${product.image}`} 
                     alt={product.name} 
                     className="product-image" 
                     onError={(e) => {
