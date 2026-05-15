@@ -6,7 +6,7 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
     name: '',
     price: '',
     category: '',
-    description: ''
+    description: '',
   });
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,16 +18,16 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
         name: product.name,
         price: product.price,
         category: product.category,
-        description: product.description
+        description: product.description,
       });
     }
   }, [product]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -49,13 +49,17 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
         data.append('image', imageFile);
       }
 
-      const response = await axios.put(`https://nutrasurge-reviews.onrender.com//api/products/${product._id}`, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const response = await axios.put(
+        `https://nutrasurge-reviews.onrender.com/api/products/${product._id}`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         }
-      });
-      
-      onUpdate(response.data);
+      );
+
+      onUpdate?.(response.data);
     } catch (err) {
       setError('Failed to update product. Please try again.');
     } finally {
@@ -70,15 +74,29 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3 className="modal-title">Edit Product</h3>
-          <button className="modal-close" onClick={onClose}>&times;</button>
+          <button className="modal-close" onClick={onClose}>
+            &times;
+          </button>
         </div>
-        
-        {error && <div style={{ color: 'var(--error-color)', marginBottom: '1rem', fontSize: 'var(--font-sm)' }}>{error}</div>}
-        
+
+        {error && (
+          <div
+            style={{
+              color: 'var(--error-color)',
+              marginBottom: '1rem',
+              fontSize: 'var(--font-sm)',
+            }}
+          >
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="flex gap-4" style={{ marginBottom: '1rem' }}>
             <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
-              <label className="form-label" htmlFor="name">Product Name</label>
+              <label className="form-label" htmlFor="name">
+                Product Name
+              </label>
               <input
                 id="name"
                 type="text"
@@ -88,8 +106,11 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
                 required
               />
             </div>
+
             <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
-              <label className="form-label" htmlFor="price">Price ($)</label>
+              <label className="form-label" htmlFor="price">
+                Price ($)
+              </label>
               <input
                 id="price"
                 type="number"
@@ -102,10 +123,12 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
               />
             </div>
           </div>
-          
+
           <div className="flex gap-4" style={{ marginBottom: '1rem' }}>
             <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
-              <label className="form-label" htmlFor="category">Category</label>
+              <label className="form-label" htmlFor="category">
+                Category
+              </label>
               <select
                 id="category"
                 className="input-field"
@@ -114,7 +137,9 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
                 required
                 style={{ appearance: 'auto' }}
               >
-                <option value="" disabled>Select a category</option>
+                <option value="" disabled>
+                  Select a category
+                </option>
                 <option value="Protein">Protein</option>
                 <option value="Mass Gainer">Mass Gainer</option>
                 <option value="Pre Workout">Pre Workout</option>
@@ -129,9 +154,11 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
                 <option value="Protein Blend">Protein Blend</option>
               </select>
             </div>
-            
+
             <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
-              <label className="form-label" htmlFor="image">New Image (Optional)</label>
+              <label className="form-label" htmlFor="image">
+                New Image (Optional)
+              </label>
               <input
                 id="image"
                 type="file"
@@ -142,9 +169,11 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
               />
             </div>
           </div>
-          
+
           <div className="form-group">
-            <label className="form-label" htmlFor="description">Description</label>
+            <label className="form-label" htmlFor="description">
+              Description
+            </label>
             <textarea
               id="description"
               className="input-field"
@@ -153,23 +182,20 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
               rows="4"
               required
               style={{ resize: 'vertical' }}
-            ></textarea>
+            />
           </div>
-          
+
           <div className="flex justify-between" style={{ marginTop: '2rem' }}>
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="btn btn-outline"
               onClick={onClose}
               disabled={loading}
             >
               Cancel
             </button>
-            <button 
-              type="submit" 
-              className="btn btn-primary"
-              disabled={loading}
-            >
+
+            <button type="submit" className="btn btn-primary" disabled={loading}>
               {loading ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
@@ -180,3 +206,4 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
 };
 
 export default EditProductModal;
+

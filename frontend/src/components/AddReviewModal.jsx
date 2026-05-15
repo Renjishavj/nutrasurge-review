@@ -43,8 +43,7 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
         return;
       }
 
-      await axios.post(`https://nutrasurge-reviews.onrender.com//api/products/${productId}/reviews`, {
-        name,
+      await axios.post(`https://nutrasurge-reviews.onrender.com/api/products/${productId}/reviews`, {
         message,
         starRating: Number(starRating),
         reviewDate: dateObj.toISOString(),

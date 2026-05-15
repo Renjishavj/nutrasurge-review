@@ -41,12 +41,12 @@ const AddProductForm = ({ onProductAdded }) => {
         data.append('image', imageFile);
       }
 
-      const response = await axios.post('https://nutrasurge-reviews.onrender.com//api/products', data, {
+      const response = await axios.post('https://nutrasurge-reviews.onrender.com/api/products', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      
+
       setMessage('Product added successfully!');
       setFormData({ name: '', price: '', category: '', description: '' });
       setImageFile(null);

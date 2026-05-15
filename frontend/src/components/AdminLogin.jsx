@@ -15,10 +15,11 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://nutrasurge-reviews.onrender.com//api/admin/login', {
+      const response = await axios.post('https://nutrasurge-reviews.onrender.com/api/admin/login', {
         username,
-        password
+        password,
       });
+
 
       if (response.data.success) {
         localStorage.setItem('isAdmin', 'true');

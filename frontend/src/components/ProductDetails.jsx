@@ -17,7 +17,7 @@ const ProductDetails = () => {
       try {
         setLoading(true);
         setError('');
-        const res = await axios.get(`https://nutrasurge-reviews.onrender.com//api/products/${id}`);
+        const res = await axios.get(`https://nutrasurge-reviews.onrender.com/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
         setError(err.response?.data?.error || 'Failed to load product');
@@ -42,8 +42,9 @@ const ProductDetails = () => {
   const refresh = async () => {
     try {
       setError('');
-      const res = await axios.get(`https://nutrasurge-reviews.onrender.com//api/products/${id}`);
+      const res = await axios.get(`https://nutrasurge-reviews.onrender.com/api/products/${id}`);
       setProduct(res.data);
+
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to refresh');
     }
