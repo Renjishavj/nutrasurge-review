@@ -50,7 +50,7 @@ const EditProductModal = ({ product, onClose, onUpdate }) => {
       }
 
       const response = await axios.put(
-        `https://nutrasurge-reviews.onrender.com/api/products/${product._id}`,
+        `http://localhost:5000/api/products/${product._id}`,
         data,
         {
           headers: {

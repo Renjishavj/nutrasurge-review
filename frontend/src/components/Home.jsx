@@ -57,7 +57,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-axios.get('https://nutrasurge-reviews.onrender.com/api/products')
+        const response = await axios.get('http://localhost:5000/api/products');
         setProducts(response.data);
       } catch (error) {
         console.error('Failed to fetch products', error);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const AdminPendingReviews = () => {
+const AdminPendingReviews = ({ onModerationDone }) => {
   const [pending, setPending] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -10,7 +10,7 @@ const AdminPendingReviews = () => {
     try {
       setError('');
       setLoading(true);
-      const res = await axios.get('https://nutrasurge-reviews.onrender.com/api/admin/reviews/pending', {
+      const res = await axios.get('http://localhost:5000/api/admin/reviews/pending', {
         headers: {
           'x-admin': 'true',
         },
@@ -30,7 +30,7 @@ const AdminPendingReviews = () => {
   const moderate = async (reviewId, action) => {
     try {
       await axios.patch(
-        `https://nutrasurge-reviews.onrender.com/api/admin/reviews/${reviewId}`,
+        `http://localhost:5000/api/admin/reviews/${reviewId}`,
         { action },
         {
           headers: {
@@ -39,6 +39,7 @@ const AdminPendingReviews = () => {
         }
       );
       await fetchPending();
+      onModerationDone?.();
     } catch (err) {
       setError(err.response?.data?.error || 'Moderation failed');
     }
@@ -49,7 +50,7 @@ const AdminPendingReviews = () => {
   }
 
   return (
-    <div className="card" style={{ marginTop: '2rem' }}>
+    <div id="pending-reviews" className="card" style={{ marginTop: '2rem' }}>
       <h3 style={{ marginBottom: '1rem', fontSize: 'var(--font-lg)' }}>Pending Reviews</h3>
 
       {error && <div style={{ color: 'var(--error-color)', marginBottom: '1rem' }}>{error}</div>}
@@ -87,7 +88,12 @@ const AdminPendingReviews = () => {
                 <button className="btn btn-primary" type="button" style={{ flex: 1 }} onClick={() => moderate(r._id, 'accept')}>
                   Accept
                 </button>
-                <button className="btn btn-outline" type="button" style={{ flex: 1, borderColor: '#fee2e2', color: 'var(--error-color)' }} onClick={() => moderate(r._id, 'reject')}>
+                <button
+                  className="btn btn-outline"
+                  type="button"
+                  style={{ flex: 1, borderColor: '#fee2e2', color: 'var(--error-color)' }}
+                  onClick={() => moderate(r._id, 'reject')}
+                >
                   Reject
                 </button>
               </div>

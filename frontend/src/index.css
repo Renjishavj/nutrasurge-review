@@ -257,3 +257,29 @@ h1, h2, h3, h4, h5, h6 {
 .modal-close:hover {
   color: var(--text-color);
 }
+
+/* Admin header notification badge (Reviews) */
+.admin-reviews-btn {
+  position: relative;
+  padding-right: 2.5rem;
+}
+
+.admin-notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-color);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
