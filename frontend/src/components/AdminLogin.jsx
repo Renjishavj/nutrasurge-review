@@ -15,7 +15,7 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/admin/login', {
+      const response = await axios.post('https://nutrasurge-reviews.onrender.com/api/admin/login', {
         username,
         password,
       });
