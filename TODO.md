@@ -1,10 +1,8 @@
 # TODO
-- [x] Add pending reviews count fetching to Admin Dashboard and create a Reviews button with badge UI.
-- [x] Add anchor/id to Pending Reviews section and implement smooth scroll when clicking Reviews button.
-- [x] Refresh badge count after moderation actions (Accept/Reject).
-- [x] Add CSS for notification badge / button UI in `frontend/src/index.css`.
-- [ ] Test: verify badge appears on `/admin` and scroll works; verify count updates after moderation.
 
-
+- [ ] Fix Add Review submission payload to include `name` so Mongoose `reviews.*.name` required validation passes.
+- [ ] (Optional) Add client-side validation for `starRating` to ensure it’s between 1 and 5 before submitting.
+- [ ] Test: add a review and confirm no `ValidationError: Product validation failed: reviews.X.name`.
+- [x] Fix implemented: AddReviewModal now sends `name` in the review POST payload.
 
 
