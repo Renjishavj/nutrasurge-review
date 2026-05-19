@@ -342,7 +342,7 @@ const Home = () => {
                   style={{
                     textDecoration: "none",
                     display: "inline-flex",
-                    background: "skyblues",
+                    background: "skyblue",
                     border: "1px solid skyblue",
                     color: "#003366",
                   }}

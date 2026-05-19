@@ -11,6 +11,31 @@ const reviewSubSchema = new mongoose.Schema(
       max: 5,
     },
     reviewDate: { type: Date, required: true },
+
+    // Customer-provided product usage details
+    expiryDate: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          // MM/YYYY
+          return /^(0[1-9]|1[0-2])\/\d{4}$/.test(v);
+        },
+        message: 'expiryDate must be in MM/YYYY format',
+      },
+    },
+    batchCode: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          // Alphanumeric only (no spaces or dashes)
+          return /^[A-Za-z0-9]+$/.test(v);
+        },
+        message: 'batchCode must be alphanumeric only',
+      },
+    },
+
     status: {
       type: String,
       required: true,

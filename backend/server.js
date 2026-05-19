@@ -105,7 +105,8 @@ app.get('/api/products/:id', async (req, res) => {
 app.post('/api/products/:id/reviews', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, message, starRating, reviewDate } = req.body;
+    const { name, message, starRating, reviewDate, expiryDate, batchCode } = req.body;
+
 
     const product = await Product.findById(id);
     if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -115,11 +116,21 @@ app.post('/api/products/:id/reviews', async (req, res) => {
       return res.status(400).json({ error: 'Invalid reviewDate' });
     }
 
+    if (!expiryDate || !/^(0[1-9]|1[0-2])\/\d{4}$/.test(String(expiryDate))) {
+      return res.status(400).json({ error: 'Invalid expiryDate. Use MM/YYYY.' });
+    }
+
+    if (!batchCode || !/^[A-Za-z0-9]+$/.test(String(batchCode))) {
+      return res.status(400).json({ error: 'Invalid batchCode. Use alphanumeric characters only.' });
+    }
+
     const review = {
       name,
       message,
       starRating: Number(starRating),
       reviewDate: dateObj,
+      expiryDate: String(expiryDate),
+      batchCode: String(batchCode),
       status: 'pending',
     };
 
@@ -154,6 +165,8 @@ app.get('/api/admin/reviews/pending', async (req, res) => {
             message: r.message,
             starRating: r.starRating,
             reviewDate: r.reviewDate,
+            expiryDate: r.expiryDate,
+            batchCode: r.batchCode,
             createdAt: r.createdAt,
           });
         }

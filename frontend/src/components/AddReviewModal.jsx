@@ -12,6 +12,9 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
   const [starRating, setStarRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewDate, setReviewDate] = useState(getLocalDateInputValue());
+  const [expiryDate, setExpiryDate] = useState('');
+  const [batchCode, setBatchCode] = useState('');
+
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,9 +28,12 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
     setStarRating(0);
     setHoverRating(0);
     setReviewDate(getLocalDateInputValue());
+    setExpiryDate('');
+    setBatchCode('');
     setError('');
     setSuccessOpen(false);
   }, [productId]);
+
 
   const stars = useMemo(() => [1, 2, 3, 4, 5], []);
   const activeRating = hoverRating || starRating;
@@ -44,12 +50,25 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
         return;
       }
 
+      if (!expiryDate || !/^(0[1-9]|1[0-2])\/\d{4}$/.test(String(expiryDate))) {
+        setError('Invalid expiry date. Use MM/YYYY.');
+        return;
+      }
+
+      if (!batchCode || !/^[A-Za-z0-9]+$/.test(String(batchCode))) {
+        setError('Invalid batch code. Use alphanumeric characters only.');
+        return;
+      }
+
       await axios.post(`http://localhost:5000/api/products/${productId}/reviews`, {
         name,
         message,
         starRating: Number(starRating),
         reviewDate: dateObj.toISOString(),
+        expiryDate: String(expiryDate),
+        batchCode: String(batchCode),
       });
+
 
       setSuccessOpen(true);
       onSubmitted?.();
@@ -157,6 +176,37 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
                 required
               />
             </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="review-expiry">
+                Expiry Date (MM/YYYY)
+              </label>
+              <input
+                id="review-expiry"
+                type="text"
+                className="input-field"
+                placeholder="MM/YYYY"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="review-batch">
+                Batch Code
+              </label>
+              <input
+                id="review-batch"
+                type="text"
+                className="input-field"
+                placeholder="Alphanumeric only"
+                value={batchCode}
+                onChange={(e) => setBatchCode(e.target.value)}
+                required
+              />
+            </div>
+
 
             <div className="flex justify-between" style={{ marginTop: '2rem' }}>
               <button type="button" className="btn btn-outline" onClick={onClose} disabled={loading}>

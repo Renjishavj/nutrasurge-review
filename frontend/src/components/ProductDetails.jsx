@@ -280,7 +280,20 @@ const ProductDetails = () => {
                           <div style={{ fontWeight: 800, fontSize: 'var(--font-base)' }}>{r.name}</div>
                           <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.25rem' }}>
                             {r.reviewDate ? new Date(r.reviewDate).toLocaleDateString() : ''}
+                            {r.expiryDate ? (
+                              <>
+                                <br />
+                                Expiry: {r.expiryDate}
+                              </>
+                            ) : null}
+                            {r.batchCode ? (
+                              <>
+                                <br />
+                                Batch: {r.batchCode}
+                              </>
+                            ) : null}
                           </div>
+
                         </div>
 
                         <div style={{ fontSize: '1.1rem', letterSpacing: '1px' }}>
