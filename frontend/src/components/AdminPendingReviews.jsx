@@ -10,7 +10,7 @@ const AdminPendingReviews = ({ onModerationDone }) => {
     try {
       setError('');
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/admin/reviews/pending', {
+      const res = await axios.get('https://nutrasurge-reviews.onrender.com/api/admin/reviews/pending', {
         headers: {
           'x-admin': 'true',
         },
@@ -30,7 +30,7 @@ const AdminPendingReviews = ({ onModerationDone }) => {
   const moderate = async (reviewId, action) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/admin/reviews/${reviewId}`,
+        `https://nutrasurge-reviews.onrender.com/api/admin/reviews/${reviewId}`,
         { action },
         {
           headers: {
