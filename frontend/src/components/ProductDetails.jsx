@@ -235,8 +235,8 @@ const ProductDetails = () => {
                         </span>
                       </div>
                       <div style={{ marginTop: '0.25rem', color: '#333', fontSize: 'var(--font-sm)' }}>
-                        <strong>{averageRating.toFixed(1)}</strong> / 5 average rating •{' '}
-                        {acceptedReviews.length} approved review(s)
+                        <strong>{averageRating.toFixed(1)}</strong> / 5 average rating 
+                    
                       </div>
                     </>
                   ) : (
@@ -255,9 +255,7 @@ const ProductDetails = () => {
           <div style={{ padding: '2rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
               <h3 style={{ marginBottom: '0.75rem', fontSize: 'var(--font-lg)' }}>Reviews</h3>
-              <div style={{ color: '#666', fontSize: 'var(--font-sm)' }}>
-                Showing only approved reviews
-              </div>
+             
             </div>
 
             {acceptedReviews.length ? (
