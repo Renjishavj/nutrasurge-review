@@ -3,6 +3,7 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import nutrasurgeLogo from "../assets/Nurtrasurge-logo.png";
 import Footer from "./Footer";
+import baner from "../assets/baner.png"
 
 const REVIEWS = [
   {
@@ -57,7 +58,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("https://nutrasurge-reviews.onrender.com/api/products");
+        const response = await axios.get("http://localhost:5000/api/products");
         setProducts(response.data);
       } catch (error) {
         console.error("Failed to fetch products", error);
@@ -114,6 +115,25 @@ const Home = () => {
           </div>
         </div>
       </header>
+      <div
+            style={{
+    width: "100%",
+    marginBottom: "2rem",
+  }}
+      >
+               <img
+    src={baner}
+    alt="Banner"
+     style={{
+      width: "100%",
+      height: "auto",
+      display: "block",
+      borderRadius: "20px",
+      objectFit: "cover",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+    }}
+  />
+          </div>
 
       {/* ── BANNER ── */}
       <section
@@ -135,6 +155,8 @@ const Home = () => {
             flexWrap: "wrap",
           }}
         >
+
+          
           {/* Left: headline + badges */}
           <div style={{ flex: "1 1 380px" }}>
             <h1 style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>
