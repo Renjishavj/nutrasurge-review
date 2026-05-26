@@ -179,6 +179,40 @@ app.get('/api/admin/reviews/pending', async (req, res) => {
   }
 });
 
+// Get All Reviews for Admin
+app.get('/api/admin/reviews/all', async (req, res) => {
+  try {
+    if (!isAdminRequest(req)) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+
+    const products = await Product.find({}, { name: 1, reviews: 1 });
+    const allReviews = [];
+
+    products.forEach((p) => {
+      (p.reviews || []).forEach((r) => {
+        allReviews.push({
+          _id: r._id,
+          productId: p._id,
+          productName: p.name,
+          name: r.name,
+          message: r.message,
+          starRating: r.starRating,
+          reviewDate: r.reviewDate,
+          expiryDate: r.expiryDate,
+          batchCode: r.batchCode,
+          createdAt: r.createdAt,
+          status: r.status,
+        });
+      });
+    });
+
+    res.json({ allReviews });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch all reviews' });
+  }
+});
+
 // Admin Accept/Reject Review
 app.patch('/api/admin/reviews/:reviewId', async (req, res) => {
   try {
@@ -207,6 +241,28 @@ app.patch('/api/admin/reviews/:reviewId', async (req, res) => {
   } catch (error) {
     console.error('Moderate review error:', error);
     res.status(500).json({ error: 'Failed to moderate review' });
+  }
+});
+
+// Admin Delete Review
+app.delete('/api/admin/reviews/:reviewId', async (req, res) => {
+  try {
+    if (!isAdminRequest(req)) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+
+    const { reviewId } = req.params;
+
+    const product = await Product.findOne({ 'reviews._id': reviewId });
+    if (!product) return res.status(404).json({ error: 'Review not found' });
+
+    product.reviews = product.reviews.filter((r) => String(r._id) !== String(reviewId));
+    await product.save();
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Delete review error:', error);
+    res.status(500).json({ error: 'Failed to delete review' });
   }
 });
 

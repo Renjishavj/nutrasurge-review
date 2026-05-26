@@ -16,7 +16,7 @@ const Dashboard = () => {
   const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/products');
+      const response = await axios.get('https://nutrasurge-reviews.onrender.com/api/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Failed to fetch products', error);
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const fetchPendingCount = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/reviews/pending', {
+      const res = await axios.get('https://nutrasurge-reviews.onrender.com/api/admin/reviews/pending', {
         headers: { 'x-admin': 'true' },
       });
       setPendingCount(res.data?.pending?.length || 0);
@@ -75,7 +75,7 @@ const Dashboard = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`https://nutrasurge-reviews.onrender.com/api/products/${id}`);
       setProducts(products.filter((p) => p._id !== id));
     } catch (error) {
       console.error('Failed to delete product', error);

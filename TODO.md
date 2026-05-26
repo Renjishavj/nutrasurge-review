@@ -1,13 +1,9 @@
 # TODO
+- [x] Step 1: Add backend endpoints to view all admin reviews and delete a review subdocument
 
-- [x] Fix Add Review submission payload to include `name` so Mongoose `reviews.*.name` required validation passes.
-- [ ] Add `expiryDate` (MM/YYYY) + `batchCode` (alphanumeric) fields to review creation.
-- [ ] Add server-side validation and store these fields on pending/accepted reviews.
-- [ ] Update admin pending reviews to include these fields.
-- [ ] Test end-to-end submission and rendering.
+- [x] Step 2: Update frontend `AdminPendingReviews.jsx` to add right-aligned "View All Reviews" button near Pending Reviews header
 
-- [ ] (Optional) Add client-side validation for `starRating` to ensure it’s between 1 and 5 before submitting.
-- [ ] Test: add a review and confirm no `ValidationError: Product validation failed: reviews.X.name`.
-- [x] Fix implemented: AddReviewModal now sends `name` in the review POST payload.
-
+- [x] Step 3: Update frontend to fetch and render all reviews section
+- [x] Step 4: Add delete icon/action per review in the all-reviews section, wired to new backend delete endpoint
+- [x] Step 5: Run quick sanity checks (no runtime syntax errors) and ensure pending moderation still works
 

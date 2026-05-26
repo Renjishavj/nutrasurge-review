@@ -10,7 +10,7 @@ const AdminPendingReviews = ({ onModerationDone }) => {
     try {
       setError('');
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/admin/reviews/pending', {
+      const res = await axios.get('https://nutrasurge-reviews.onrender.com/api/admin/reviews/pending', {
         headers: {
           'x-admin': 'true',
         },
@@ -30,7 +30,7 @@ const AdminPendingReviews = ({ onModerationDone }) => {
   const moderate = async (reviewId, action) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/admin/reviews/${reviewId}`,
+        `https://nutrasurge-reviews.onrender.com/api/admin/reviews/${reviewId}`,
         { action },
         {
           headers: {
@@ -45,20 +45,71 @@ const AdminPendingReviews = ({ onModerationDone }) => {
     }
   };
 
+  const [showAll, setShowAll] = useState(false);
+  const [allReviews, setAllReviews] = useState([]);
+  const [loadingAll, setLoadingAll] = useState(false);
+
+  const fetchAll = async () => {
+    try {
+      setLoadingAll(true);
+      setError('');
+      const res = await axios.get('https://nutrasurge-reviews.onrender.com/api/admin/reviews/all', {
+        headers: { 'x-admin': 'true' },
+      });
+      setAllReviews(res.data?.allReviews || []);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to fetch all reviews');
+    } finally {
+      setLoadingAll(false);
+    }
+  };
+
+  const deleteReview = async (reviewId) => {
+    const ok = window.confirm('Delete this review?');
+    if (!ok) return;
+
+    try {
+      setError('');
+      await axios.delete(`https://nutrasurge-reviews.onrender.com/api/admin/reviews/${reviewId}`, {
+        headers: { 'x-admin': 'true' },
+      });
+      await fetchAll();
+      await fetchPending();
+      onModerationDone?.();
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to delete review');
+    }
+  };
+
   if (loading) {
     return <div style={{ color: 'var(--text-color)', opacity: 0.8 }}>Loading pending reviews...</div>;
   }
 
   return (
     <div id="pending-reviews" className="card" style={{ marginTop: '2rem' }}>
-      <h3 style={{ marginBottom: '1rem', fontSize: 'var(--font-lg)' }}>Pending Reviews</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+        <h3 style={{ marginBottom: 0, fontSize: 'var(--font-lg)' }}>Pending Reviews</h3>
+
+        <button
+          type="button"
+          className="btn btn-outline"
+          onClick={async () => {
+            const next = !showAll;
+            setShowAll(next);
+            if (next) await fetchAll();
+          }}
+          style={{ padding: '0.5rem 1rem' }}
+        >
+          {showAll ? 'Hide All Reviews' : 'View All Reviews'}
+        </button>
+      </div>
 
       {error && <div style={{ color: 'var(--error-color)', marginBottom: '1rem' }}>{error}</div>}
 
       {pending.length === 0 ? (
-        <div style={{ color: '#666' }}>No pending reviews.</div>
+        <div style={{ color: '#666', marginTop: '0.75rem' }}>No pending reviews.</div>
       ) : (
-        <div style={{ display: 'grid', gap: '1rem' }}>
+        <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem' }}>
           {pending.map((r) => (
             <div
               key={r._id}
@@ -75,7 +126,9 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                 </div>
                 <div style={{ color: '#111' }}>
                   {'★'.repeat(Number(r.starRating || 0))}
-                  <span style={{ color: '#ccc' }}>{'★'.repeat(Math.max(0, 5 - Number(r.starRating || 0)))}</span>
+                  <span style={{ color: '#ccc' }}>
+                    {'★'.repeat(Math.max(0, 5 - Number(r.starRating || 0)))}
+                  </span>
                 </div>
               </div>
 
@@ -99,6 +152,77 @@ const AdminPendingReviews = ({ onModerationDone }) => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {showAll && (
+        <div style={{ marginTop: '2rem' }}>
+          <h3 style={{ marginBottom: '1rem', fontSize: 'var(--font-lg)' }}>All Reviews</h3>
+
+          {loadingAll ? (
+            <div style={{ color: 'var(--text-color)', opacity: 0.8 }}>Loading all reviews...</div>
+          ) : allReviews.length === 0 ? (
+            <div style={{ color: '#666' }}>No reviews found.</div>
+          ) : (
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              {allReviews
+                .slice()
+                .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+                .map((r) => (
+                  <div
+                    key={r._id}
+                    style={{
+                      border: '1px solid var(--border-color)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '1rem',
+                      position: 'relative',
+                    }}
+                  >
+                    <button
+                      type="button"
+                      aria-label="Delete review"
+                      title="Delete"
+                      onClick={() => deleteReview(r._id)}
+                      style={{
+                        position: 'absolute',
+                        top: '0.75rem',
+                        right: '0.75rem',
+                        background: '#fff',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        padding: '0.25rem 0.5rem',
+                        color: 'var(--error-color)',
+                      }}
+                    >
+                      🗑
+                    </button>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+                      <div>
+                        <div style={{ fontWeight: 800 }}>{r.productName}</div>
+                        <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
+                      </div>
+                      <div style={{ color: '#111' }}>
+                        {'★'.repeat(Number(r.starRating || 0))}
+                        <span style={{ color: '#ccc' }}>
+                          {'★'.repeat(Math.max(0, 5 - Number(r.starRating || 0)))}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ marginTop: '0.75rem', color: '#333' }}>{r.message}</div>
+                    <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.5rem' }}>
+                      Review date: {r.reviewDate ? new Date(r.reviewDate).toLocaleDateString() : ''}
+                    </div>
+
+                    <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.5rem' }}>
+                      Status: <b style={{ color: '#111' }}>{r.status}</b>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       )}
     </div>
