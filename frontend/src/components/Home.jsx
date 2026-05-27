@@ -8,7 +8,7 @@ import baner from "../assets/baner.png"
 const REVIEWS = [
   {
     id: 1,
-    name: "Rahul.",
+    name: "Wyatt Holloway",
     rating: 5,
     text: "Nutrasurge protein is hands down the best I've tried. Mixes perfectly, tastes great, and I've seen real gains in just 6 weeks!",
     date: "April 2025",
@@ -16,7 +16,7 @@ const REVIEWS = [
   },
   {
     id: 2,
-    name: "Arjun.",
+    name: "Colton Reeves",
     rating: 5,
     text: "I was skeptical at first, but Nutrasurge pre-workout completely changed my training sessions. Incredible energy without the crash.",
     date: "March 2025",
@@ -24,7 +24,7 @@ const REVIEWS = [
   },
   {
     id: 3,
-    name: "Niranjan",
+    name: "Aurora Bennett",
     rating: 4,
     text: "Great quality supplements. Fast shipping and the packaging is premium. Will definitely be ordering again.",
     date: "May 2025",
