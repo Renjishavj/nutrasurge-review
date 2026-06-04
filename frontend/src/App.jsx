@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/nutrasurge-login" element={<AdminLogin />} />
         <Route path="/admin" element={<Dashboard />} />
       </Routes>
     </Router>

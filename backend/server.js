@@ -51,7 +51,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/nutrasurge'
 // Admin Login Route (Hardcoded)
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body;
-  if (username === 'admin' && password === 'password123') {
+  if (username === 'nutrasurge@admin' && password === 'NSL#Admin2026') {
     res.json({ success: true, message: 'Login successful' });
   } else {
     res.status(401).json({ success: false, message: 'Invalid credentials' });
