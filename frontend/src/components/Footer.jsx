@@ -21,17 +21,17 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
+  // {
+  //   label: 'LinkedIn',
+  //   href: 'https://linkedin.com',
+  //   icon: (
+  //     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+  //       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+  //       <rect x="2" y="9" width="4" height="12" />
+  //       <circle cx="4" cy="4" r="2" />
+  //     </svg>
+  //   ),
+  // },
 ];
 
 const Footer = () => (
@@ -80,7 +80,7 @@ const Footer = () => (
           </span>
         </div>
         <a
-          href="mailto:nutrasurgelabsusa@gmail.com"
+          href="mailto:verifymynutra@nutrasurgelabsusa.com "
           style={{
             fontSize: '0.85rem',
             color: '#1a6fde',
@@ -90,7 +90,7 @@ const Footer = () => (
             gap: '0.35rem',
           }}
         >
-          ✉️ nutrasurgelabsusa@gmail.com
+          ✉️ verifymynutra@nutrasurgelabsusa.com 
         </a>
       </div>
 
