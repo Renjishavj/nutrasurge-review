@@ -261,7 +261,15 @@ const ProductDetails = () => {
                   }}
                 >
                   {acceptedReviews.length > 0 && (
-                    <>
+                    <div
+                      style={{
+                        border: "1px solid var(--border-color)",
+                        borderRadius: "var(--radius-md)",
+                        padding: "0.75rem 1rem",
+                        background: "#fff",
+                        minWidth: 240,
+                      }}
+                    >
                       <div
                         style={{
                           fontSize: "var(--font-sm)",
@@ -276,6 +284,7 @@ const ProductDetails = () => {
                           {"★".repeat(5 - Math.round(averageRating))}
                         </span>
                       </div>
+
                       <div
                         style={{
                           marginTop: "0.25rem",
@@ -286,7 +295,7 @@ const ProductDetails = () => {
                         <strong>{averageRating.toFixed(1)}</strong> / 5 average
                         rating
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
 
