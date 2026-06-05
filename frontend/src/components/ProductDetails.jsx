@@ -240,7 +240,7 @@ const ProductDetails = () => {
                       </div>
                     </>
                   ) : (
-                    <div style={{ fontSize: 'var(--font-sm)', color: '#666' ,display:"none"}}>No approved reviews yet.</div>
+                    <div></div>
                   )}
                 </div>
 
