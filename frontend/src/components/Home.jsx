@@ -3,7 +3,7 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import nutrasurgeLogo from "../assets/Nurtrasurge-logo.png";
 import Footer from "./Footer";
-import baner from "../assets/baner.png"
+import baner from "../assets/baner.jpeg"
 
 const REVIEWS = [
   {

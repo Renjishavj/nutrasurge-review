@@ -240,7 +240,7 @@ const ProductDetails = () => {
                       </div>
                     </>
                   ) : (
-                    <div style={{ fontSize: 'var(--font-sm)', color: '#666' }}>No approved reviews yet.</div>
+                    <div style={{ fontSize: 'var(--font-sm)', color: '#666' ,display:"none"}}>No approved reviews yet.</div>
                   )}
                 </div>
 
@@ -311,7 +311,7 @@ const ProductDetails = () => {
                   ))}
               </div>
             ) : (
-              <div style={{ color: '#666', padding: '1rem 0' }}>No reviews approved yet.</div>
+              <div style={{ color: '#666', padding: '1rem 0',display:"none" }}>No reviews approved yet.</div>
             )}
           </div>
         </div>
