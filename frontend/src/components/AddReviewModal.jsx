@@ -137,10 +137,14 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
                   onChange={(e) => setStarRating(Number(e.target.value))}
                   style={{ width: '150px' }}
                 />
-                <span style={{ position: "relative", display: "inline-block", fontSize: '1.75rem', lineHeight: 1 }}>
-                  <span style={{ color: "#222" }}>★★★★★</span>
-                  <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(starRating / 5) * 100}%`, whiteSpace: "nowrap", textShadow: starRating > 0 ? '0 0 8px rgba(245,158,11,0.6)' : 'none' }}>★★★★★</span>
-                </span>
+                <div style={{ display: "inline-flex", fontSize: '1.75rem', lineHeight: 1 }}>
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <span key={s} style={{ position: "relative", color: "#222" }}>
+                      ★
+                      <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: starRating >= s ? "100%" : starRating >= s - 0.5 ? "50%" : "0%", color: "#f59e0b", textShadow: starRating > 0 ? '0 0 8px rgba(245,158,11,0.6)' : 'none' }}>★</span>
+                    </span>
+                  ))}
+                </div>
                 <span style={{ fontSize: '0.82rem', color: '#888' }}>
                   {starRating} / 5
                 </span>

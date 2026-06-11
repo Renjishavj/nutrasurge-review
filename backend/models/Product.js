@@ -7,7 +7,7 @@ const reviewSubSchema = new mongoose.Schema(
     starRating: {
       type: Number,
       required: true,
-      min: 1,
+      min: 0,
       max: 5,
     },
     reviewDate: { type: Date, required: true },

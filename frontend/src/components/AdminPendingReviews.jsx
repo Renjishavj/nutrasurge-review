@@ -125,10 +125,14 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                   <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
                 </div>
                 <div style={{ color: '#111' }}>
-                  <span style={{ position: "relative", display: "inline-block" }}>
-                    <span style={{ color: "#ccc" }}>★★★★★</span>
-                    <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
-                  </span>
+                  <div style={{ display: "inline-flex", letterSpacing: "1px" }}>
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span key={s} style={{ position: "relative", color: "#ccc" }}>
+                        ★
+                        <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: Number(r.starRating || 0) >= s ? "100%" : Number(r.starRating || 0) >= s - 0.5 ? "50%" : "0%", color: "#f59e0b" }}>★</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -207,10 +211,14 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                         <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
                       </div>
                       <div style={{ color: '#111' }}>
-                        <span style={{ position: "relative", display: "inline-block" }}>
-                          <span style={{ color: "#ccc" }}>★★★★★</span>
-                          <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
-                        </span>
+                        <div style={{ display: "inline-flex", letterSpacing: "1px" }}>
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <span key={s} style={{ position: "relative", color: "#ccc" }}>
+                              ★
+                              <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: Number(r.starRating || 0) >= s ? "100%" : Number(r.starRating || 0) >= s - 0.5 ? "50%" : "0%", color: "#f59e0b" }}>★</span>
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
 

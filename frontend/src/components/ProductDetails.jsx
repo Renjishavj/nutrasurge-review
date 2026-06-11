@@ -251,59 +251,74 @@ const ProductDetails = () => {
                   marginBottom: "1.5rem",
                 }}
               >
-                <div
-                  style={{
-                    border: "1px solid var(--border-color)",
-                    borderRadius: "var(--radius-md)",
-                    padding: "0.75rem 1rem",
-                    background: "#fff",
-                    minWidth: 240,
-                  }}
-                >
-                  {acceptedReviews.length > 0 && (
-                    <div
-                      style={{
-                        border: "1px solid var(--border-color)",
-                        borderRadius: "var(--radius-md)",
-                        padding: "0.75rem 1rem",
-                        background: "#fff",
-                        minWidth: 240,
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "var(--font-sm)",
-                          color: "#111",
-                          fontWeight: 700,
-                        }}
-                      >
-                        <span style={{ position: "relative", display: "inline-block", fontSize: "1.2rem", letterSpacing: "2px" }}>
-                          <span style={{ color: "#fde68a", fontWeight: 600 }}>★★★★★</span>
-                          <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(averageRating / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
-                        </span>
-                      </div>
+     <div
+  style={{
+    border: "1px solid var(--border-color)",
+    borderRadius: "var(--radius-md)",
+    padding: "0.75rem 1rem",
+    background: "#fff",
+    minWidth: 240,
+  }}
+>
+  {acceptedReviews.length > 0 && (
+    <>
+      <div
+        style={{
+          fontSize: "var(--font-sm)",
+          color: "#111",
+          fontWeight: 700,
+        }}
+      >
+        <div
+          style={{
+            display: "inline-flex",
+            fontSize: "1.2rem",
+            letterSpacing: "2px",
+          }}
+        >
+          {[1, 2, 3, 4, 5].map((s) => (
+            <span
+              key={s}
+              style={{
+                position: "relative",
+                color: "#fde68a",
+              }}
+            >
+              ★
+              <span
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  overflow: "hidden",
+                  width:
+                    averageRating >= s
+                      ? "100%"
+                      : averageRating >= s - 0.5
+                      ? "50%"
+                      : "0%",
+                  color: "#f59e0b",
+                }}
+              >
+                ★
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
 
-                      <div
-                        style={{
-                          marginTop: "0.25rem",
-                          color: "#333",
-                          fontSize: "var(--font-sm)",
-                        }}
-                      >
-                        <strong>{averageRating.toFixed(1)}</strong> / 5 average
-                        rating
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  className="btn btn-primary"
-                  onClick={() => setIsReviewOpen(true)}
-                >
-                  Add Review
-                </button>
-              </div>
+      <div
+        style={{
+          marginTop: "0.25rem",
+          color: "#333",
+          fontSize: "var(--font-sm)",
+        }}
+      >
+        <strong>{averageRating.toFixed(1)}</strong> / 5 average rating
+      </div>
+    </>
+  )}
+</div>
             </div>
           </div>
 
@@ -381,10 +396,14 @@ const ProductDetails = () => {
                         <div
                           style={{ fontSize: "1.1rem", letterSpacing: "1px" }}
                         >
-                          <span style={{ position: "relative", display: "inline-block" }}>
-                            <span style={{ color: "#ccc" }}>★★★★★</span>
-                            <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
-                          </span>
+                          <div style={{ display: "inline-flex" }}>
+                            {[1, 2, 3, 4, 5].map((s) => (
+                              <span key={s} style={{ position: "relative", color: "#ccc" }}>
+                                ★
+                                <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: Number(r.starRating || 0) >= s ? "100%" : Number(r.starRating || 0) >= s - 0.5 ? "50%" : "0%", color: "#f59e0b" }}>★</span>
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
 
@@ -403,6 +422,7 @@ const ProductDetails = () => {
             )}
           </div>
         </div>
+      </div>
       </main>
 
       {isReviewOpen && (
