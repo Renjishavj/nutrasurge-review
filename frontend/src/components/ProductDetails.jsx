@@ -377,20 +377,6 @@ const ProductDetails = () => {
                             {r.reviewDate
                               ? new Date(r.reviewDate).toLocaleDateString()
                               : ""}
-
-                            {r.expiryDate && (
-                              <>
-                                <br />
-                                ExpiryDate: {r.expiryDate}
-                              </>
-                            )}
-
-                            {r.batchCode && (
-                              <>
-                                <br />
-                                BatchCode: {r.batchCode}
-                              </>
-                            )}
                           </div>
                         </div>
 
