@@ -251,176 +251,191 @@ const ProductDetails = () => {
                   marginBottom: "1.5rem",
                 }}
               >
-     <div
-  style={{
-    border: "1px solid var(--border-color)",
-    borderRadius: "var(--radius-md)",
-    padding: "0.75rem 1rem",
-    background: "#fff",
-    minWidth: 240,
-  }}
->
-  {acceptedReviews.length > 0 && (
-    <>
-      <div
-        style={{
-          fontSize: "var(--font-sm)",
-          color: "#111",
-          fontWeight: 700,
-        }}
-      >
-        <div
-          style={{
-            display: "inline-flex",
-            fontSize: "1.2rem",
-            letterSpacing: "2px",
-          }}
-        >
-          {[1, 2, 3, 4, 5].map((s) => (
-            <span
-              key={s}
-              style={{
-                position: "relative",
-                color: "#fde68a",
-              }}
-            >
-              ★
-              <span
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  top: 0,
-                  overflow: "hidden",
-                  width:
-                    averageRating >= s
-                      ? "100%"
-                      : averageRating >= s - 0.5
-                      ? "50%"
-                      : "0%",
-                  color: "#f59e0b",
-                }}
-              >
-                ★
-              </span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div
-        style={{
-          marginTop: "0.25rem",
-          color: "#333",
-          fontSize: "var(--font-sm)",
-        }}
-      >
-        <strong>{averageRating.toFixed(1)}</strong> / 5 average rating
-      </div>
-    </>
-  )}
-</div>
-            </div>
-          </div>
-
-          {/* Reviews section */}
-          <div style={{ padding: "2rem" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
-                gap: "1rem",
-                flexWrap: "wrap",
-              }}
-            >
-              {acceptedReviews.length > 0 && (
-                <h3
+                <div
                   style={{
-                    marginBottom: "0.75rem",
-                    fontSize: "var(--font-lg)",
+                    border: "1px solid var(--border-color)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "0.75rem 1rem",
+                    background: "#fff",
+                    minWidth: 240,
                   }}
                 >
-                  Reviews
-                </h3>
-              )}
-            </div>
-            {acceptedReviews.length > 0 && (
-              <div style={{ display: "grid", gap: "1rem" }}>
-                {acceptedReviews
-                  .slice()
-                  .sort(
-                    (a, b) => new Date(b.reviewDate) - new Date(a.reviewDate),
-                  )
-                  .map((r) => (
-                    <div
-                      key={r._id}
-                      style={{
-                      width: "100%",
-                        border: "1px solid var(--border-color)",
-                        borderRadius: "var(--radius-lg)",
-                        padding: "1.25rem",
-                        background: "linear-gradient(180deg, #ffffff, #fcfcfc)",
-                      }}
-                    >
+                  {acceptedReviews.length > 0 && (
+                    <>
                       <div
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "1rem",
-                          marginBottom: "0.25rem",
+                          fontSize: "var(--font-sm)",
+                          color: "#111",
+                          fontWeight: 700,
                         }}
                       >
                         <div
                           style={{
-                            fontWeight: 800,
+                            display: "inline-flex",
                             fontSize: "1.2rem",
-                            color: "#111",
+                            letterSpacing: "2px",
                           }}
                         >
-                          {r.name}
-                        </div>
-                        <div
-                          style={{ fontSize: "1.2rem", letterSpacing: "1px" }}
-                        >
-                          <div style={{ display: "inline-flex" }}>
-                            {[1, 2, 3, 4, 5].map((s) => (
-                              <span key={s} style={{ position: "relative", color: "#ccc" }}>
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <span
+                              key={s}
+                              style={{
+                                position: "relative",
+                                color: "#fde68a",
+                              }}
+                            >
+                              ★
+                              <span
+                                style={{
+                                  position: "absolute",
+                                  left: 0,
+                                  top: 0,
+                                  overflow: "hidden",
+                                  width:
+                                    averageRating >= s
+                                      ? "100%"
+                                      : averageRating >= s - 0.5
+                                        ? "50%"
+                                        : "0%",
+                                  color: "#f59e0b",
+                                }}
+                              >
                                 ★
-                                <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: Number(r.starRating || 0) >= s ? "100%" : Number(r.starRating || 0) >= s - 0.5 ? "50%" : "0%", color: "#f59e0b" }}>★</span>
                               </span>
-                            ))}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div
+                        style={{
+                          marginTop: "0.25rem",
+                          color: "#333",
+                          fontSize: "var(--font-sm)",
+                        }}
+                      >
+                        <strong>{averageRating.toFixed(1)}</strong> / 5 average rating
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Reviews section */}
+            <div
+  style={{
+    padding: "2rem",
+    width: "100%",
+    display: "block",
+  }}
+>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  gap: "1rem",
+                  flexWrap: "wrap",
+                }}
+              >
+                {acceptedReviews.length > 0 && (
+                  <h3
+                    style={{
+                      marginBottom: "0.75rem",
+                      fontSize: "var(--font-lg)",
+                    }}
+                  >
+                    Reviews
+                  </h3>
+                )}
+              </div>
+              {acceptedReviews.length > 0 && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    gap: "1rem",
+                  }}
+                >
+                  {acceptedReviews
+                    .slice()
+                    .sort(
+                      (a, b) => new Date(b.reviewDate) - new Date(a.reviewDate),
+                    )
+                    .map((r) => (
+                      <div
+  key={r._id}
+  style={{
+    width: "100%",
+    minWidth: "100%",
+    boxSizing: "border-box",
+    border: "1px solid var(--border-color)",
+    borderRadius: "16px",
+    padding: "1.5rem",
+    background: "#fff",
+  }}
+>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "1rem",
+                            marginBottom: "0.25rem",
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontWeight: 800,
+                              fontSize: "1.2rem",
+                              color: "#111",
+                            }}
+                          >
+                            {r.name}
+                          </div>
+                          <div
+                            style={{ fontSize: "1.2rem", letterSpacing: "1px" }}
+                          >
+                            <div style={{ display: "inline-flex" }}>
+                              {[1, 2, 3, 4, 5].map((s) => (
+                                <span key={s} style={{ position: "relative", color: "#ccc" }}>
+                                  ★
+                                  <span style={{ position: "absolute", left: 0, top: 0, overflow: "hidden", width: Number(r.starRating || 0) >= s ? "100%" : Number(r.starRating || 0) >= s - 0.5 ? "50%" : "0%", color: "#f59e0b" }}>★</span>
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div
-                        style={{
-                          color: "#666",
-                          fontSize: "1rem",
-                          marginBottom: "1rem",
-                        }}
-                      >
-                        {r.reviewDate
-                          ? new Date(r.reviewDate).toLocaleDateString()
-                          : ""}
-                      </div>
+                        <div
+                          style={{
+                            color: "#666",
+                            fontSize: "1rem",
+                            marginBottom: "1rem",
+                          }}
+                        >
+                          {r.reviewDate
+                            ? new Date(r.reviewDate).toLocaleDateString()
+                            : ""}
+                        </div>
 
-                      <div
-                        style={{
-                          marginTop: "0.75rem",
-                          color: "#222",
-                          lineHeight: 1.6,
-                        }}
-                      >
-                        {r.message}
+                        <div
+                          style={{
+                            marginTop: "0.75rem",
+                            color: "#222",
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          {r.message}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
-            )}
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
       </main>
 
       {isReviewOpen && (
