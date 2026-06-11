@@ -277,11 +277,9 @@ const ProductDetails = () => {
                           fontWeight: 700,
                         }}
                       >
-                        <span style={{ color: "#f59e0b" }}>
-                          {"★".repeat(Math.round(averageRating))}
-                        </span>
-                        <span style={{ color: "#fde68a", fontWeight: 600 }}>
-                          {"★".repeat(5 - Math.round(averageRating))}
+                        <span style={{ position: "relative", display: "inline-block", fontSize: "1.2rem", letterSpacing: "2px" }}>
+                          <span style={{ color: "#fde68a", fontWeight: 600 }}>★★★★★</span>
+                          <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(averageRating / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
                         </span>
                       </div>
 
@@ -383,13 +381,9 @@ const ProductDetails = () => {
                         <div
                           style={{ fontSize: "1.1rem", letterSpacing: "1px" }}
                         >
-                          <span style={{ color: "#f59e0b" }}>
-                            {"★".repeat(Number(r.starRating || 0))}
-                          </span>
-                          <span style={{ color: "#ccc" }}>
-                            {"★".repeat(
-                              Math.max(0, 5 - Number(r.starRating || 0)),
-                            )}
+                          <span style={{ position: "relative", display: "inline-block" }}>
+                            <span style={{ color: "#ccc" }}>★★★★★</span>
+                            <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
                           </span>
                         </div>
                       </div>

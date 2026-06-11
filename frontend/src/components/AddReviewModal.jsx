@@ -10,7 +10,6 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [starRating, setStarRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
   const [reviewDate, setReviewDate] = useState(getLocalDateInputValue());
   const [expiryDate, setExpiryDate] = useState('');
   const [batchCode, setBatchCode] = useState('');
@@ -26,7 +25,6 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
     setName('');
     setMessage('');
     setStarRating(0);
-    setHoverRating(0);
     setReviewDate(getLocalDateInputValue());
     setExpiryDate('');
     setBatchCode('');
@@ -35,8 +33,7 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
   }, [productId]);
 
 
-  const stars = useMemo(() => [1, 2, 3, 4, 5], []);
-  const activeRating = hoverRating || starRating;
+
 
   const submit = async (e) => {
     e.preventDefault();
@@ -130,36 +127,23 @@ const AddReviewModal = ({ productId, onClose, onSubmitted }) => {
               <label className="form-label" style={{ marginBottom: '0.75rem' }}>
                 Star Rating
               </label>
-              <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
-                {stars.map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setStarRating(s)}
-                    onMouseEnter={() => setHoverRating(s)}
-                    onMouseLeave={() => setHoverRating(0)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: '2px 4px',
-                      fontSize: '1.75rem',
-                      lineHeight: 1,
-                      color: s <= activeRating ? '#f59e0b' : '#222',
-                      textShadow: s <= activeRating ? '0 0 8px rgba(245,158,11,0.6)' : 'none',
-                      transition: 'color 0.15s ease, text-shadow 0.15s ease',
-                      transform: s <= activeRating ? 'scale(1.15)' : 'scale(1)',
-                    }}
-                    aria-label={`${s} star${s > 1 ? 's' : ''}`}
-                  >
-                    ★
-                  </button>
-                ))}
-                {starRating > 0 && (
-                  <span style={{ marginLeft: '0.5rem', fontSize: '0.82rem', color: '#888' }}>
-                    {starRating} / 5
-                  </span>
-                )}
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  step="0.5"
+                  value={starRating}
+                  onChange={(e) => setStarRating(Number(e.target.value))}
+                  style={{ width: '150px' }}
+                />
+                <span style={{ position: "relative", display: "inline-block", fontSize: '1.75rem', lineHeight: 1 }}>
+                  <span style={{ color: "#222" }}>★★★★★</span>
+                  <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(starRating / 5) * 100}%`, whiteSpace: "nowrap", textShadow: starRating > 0 ? '0 0 8px rgba(245,158,11,0.6)' : 'none' }}>★★★★★</span>
+                </span>
+                <span style={{ fontSize: '0.82rem', color: '#888' }}>
+                  {starRating} / 5
+                </span>
               </div>
             </div>
 
