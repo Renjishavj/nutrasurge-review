@@ -355,7 +355,7 @@ const ProductDetails = () => {
                     <div
                       key={r._id}
                       style={{
-                         width: "100%",
+                      width: "100%",
                         border: "1px solid var(--border-color)",
                         borderRadius: "var(--radius-lg)",
                         padding: "1.25rem",
@@ -365,37 +365,22 @@ const ProductDetails = () => {
                       <div
                         style={{
                           display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
+                          alignItems: "center",
                           gap: "1rem",
-                          flexWrap: "wrap",
+                          marginBottom: "0.25rem",
                         }}
                       >
-                        <div>
-                          <div
-                            style={{
-                              fontWeight: 800,
-                              fontSize: "var(--font-base)",
-                            }}
-                          >
-                            {r.name}
-                          </div>
-
-                          <div
-                            style={{
-                              color: "#666",
-                              fontSize: "var(--font-xs)",
-                              marginTop: "0.25rem",
-                            }}
-                          >
-                            {r.reviewDate
-                              ? new Date(r.reviewDate).toLocaleDateString()
-                              : ""}
-                          </div>
-                        </div>
-
                         <div
-                          style={{ fontSize: "1.1rem", letterSpacing: "1px" }}
+                          style={{
+                            fontWeight: 800,
+                            fontSize: "1.2rem",
+                            color: "#111",
+                          }}
+                        >
+                          {r.name}
+                        </div>
+                        <div
+                          style={{ fontSize: "1.2rem", letterSpacing: "1px" }}
                         >
                           <div style={{ display: "inline-flex" }}>
                             {[1, 2, 3, 4, 5].map((s) => (
@@ -406,6 +391,18 @@ const ProductDetails = () => {
                             ))}
                           </div>
                         </div>
+                      </div>
+
+                      <div
+                        style={{
+                          color: "#666",
+                          fontSize: "1rem",
+                          marginBottom: "1rem",
+                        }}
+                      >
+                        {r.reviewDate
+                          ? new Date(r.reviewDate).toLocaleDateString()
+                          : ""}
                       </div>
 
                       <div
