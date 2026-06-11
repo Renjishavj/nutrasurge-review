@@ -355,6 +355,7 @@ const ProductDetails = () => {
                     <div
                       key={r._id}
                       style={{
+                         width: "100%",
                         border: "1px solid var(--border-color)",
                         borderRadius: "var(--radius-lg)",
                         padding: "1.25rem",
