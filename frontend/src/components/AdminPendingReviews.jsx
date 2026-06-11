@@ -125,9 +125,9 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                   <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
                 </div>
                 <div style={{ color: '#111' }}>
-                  {'★'.repeat(Number(r.starRating || 0))}
-                  <span style={{ color: '#ccc' }}>
-                    {'★'.repeat(Math.max(0, 5 - Number(r.starRating || 0)))}
+                  <span style={{ position: "relative", display: "inline-block" }}>
+                    <span style={{ color: "#ccc" }}>★★★★★</span>
+                    <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
                   </span>
                 </div>
               </div>
@@ -135,6 +135,9 @@ const AdminPendingReviews = ({ onModerationDone }) => {
               <div style={{ marginTop: '0.75rem', color: '#333' }}>{r.message}</div>
               <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.5rem' }}>
                 Review date: {r.reviewDate ? new Date(r.reviewDate).toLocaleDateString() : ''}
+              </div>
+              <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.25rem' }}>
+                Batch Code: <b style={{ color: '#111' }}>{r.batchCode || 'N/A'}</b> | Expiry: <b style={{ color: '#111' }}>{r.expiryDate || 'N/A'}</b>
               </div>
 
               <div className="flex gap-2" style={{ marginTop: '1rem' }}>
@@ -204,9 +207,9 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                         <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
                       </div>
                       <div style={{ color: '#111' }}>
-                        {'★'.repeat(Number(r.starRating || 0))}
-                        <span style={{ color: '#ccc' }}>
-                          {'★'.repeat(Math.max(0, 5 - Number(r.starRating || 0)))}
+                        <span style={{ position: "relative", display: "inline-block" }}>
+                          <span style={{ color: "#ccc" }}>★★★★★</span>
+                          <span style={{ color: "#f59e0b", position: "absolute", left: 0, top: 0, overflow: "hidden", width: `${(Number(r.starRating || 0) / 5) * 100}%`, whiteSpace: "nowrap" }}>★★★★★</span>
                         </span>
                       </div>
                     </div>
@@ -214,6 +217,9 @@ const AdminPendingReviews = ({ onModerationDone }) => {
                     <div style={{ marginTop: '0.75rem', color: '#333' }}>{r.message}</div>
                     <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.5rem' }}>
                       Review date: {r.reviewDate ? new Date(r.reviewDate).toLocaleDateString() : ''}
+                    </div>
+                    <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.25rem' }}>
+                      Batch Code: <b style={{ color: '#111' }}>{r.batchCode || 'N/A'}</b> | Expiry: <b style={{ color: '#111' }}>{r.expiryDate || 'N/A'}</b>
                     </div>
 
                     <div style={{ color: '#666', fontSize: 'var(--font-xs)', marginTop: '0.5rem' }}>
