@@ -114,34 +114,12 @@ const AdminPendingReviews = ({ onModerationDone }) => {
             <div
               key={r._id}
               style={{
-                position: 'relative',
                 border: '1px solid var(--border-color)',
                 borderRadius: 'var(--radius-md)',
                 padding: '1rem',
               }}
             >
-              <button
-                type="button"
-                aria-label="Delete review"
-                title="Delete"
-                onClick={() => deleteReview(r._id)}
-                style={{
-                  position: 'absolute',
-                  top: '0.75rem',
-                  right: '0.75rem',
-                  background: '#fff',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  padding: '0.25rem 0.5rem',
-                  color: 'var(--error-color)',
-                  zIndex: 10,
-                }}
-              >
-                🗑
-              </button>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', paddingRight: '3rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
                 <div>
                   <div style={{ fontWeight: 800 }}>{r.productName}</div>
                   <div style={{ color: '#666', fontSize: 'var(--font-xs)' }}>{r.name}</div>
